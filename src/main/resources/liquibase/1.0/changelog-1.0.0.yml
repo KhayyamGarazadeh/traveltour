@@ -1,0 +1,434 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "1",
+        "author": "Xayyam Garazada",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "tour",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "BIGINT",
+                    "autoIncrement": "true",
+                    "constraints": {
+                      "primaryKey": "true",
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "VARCHAR(255)",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "description",
+                    "type": "TEXT"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "price",
+                    "type": "DECIMAL(19,2)",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "start_date",
+                    "type": "DATE",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "end_date",
+                    "type": "DATE",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "2",
+        "author": "Xayyam Garazada",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "destination",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "BIGINT",
+                    "autoIncrement": "true",
+                    "constraints": {
+                      "primaryKey": "true",
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "location",
+                    "type": "VARCHAR(255)",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "description",
+                    "type": "TEXT"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "visit_date",
+                    "type": "DATE"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "tour_id",
+                    "type": "BIGINT",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "baseTableName": "destination",
+              "baseColumnNames": "tour_id",
+              "constraintName": "fk_destination_tour",
+              "referencedTableName": "tour",
+              "referencedColumnNames": "id"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "3",
+        "author": "Xayyam Garazada",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "guide",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "BIGINT",
+                    "autoIncrement": "true",
+                    "constraints": {
+                      "primaryKey": "true",
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "VARCHAR(255)",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "email",
+                    "type": "VARCHAR(255)",
+                    "constraints": {
+                      "nullable": "false",
+                      "unique": "true"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "phone_number",
+                    "type": "VARCHAR(50)",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "4",
+        "author": "Xayyam Garazada",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "passport",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "BIGINT",
+                    "autoIncrement": "true",
+                    "constraints": {
+                      "primaryKey": "true",
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "passport_number",
+                    "type": "VARCHAR(50)",
+                    "constraints": {
+                      "nullable": "false",
+                      "unique": "true"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "issue_date",
+                    "type": "DATE"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "expiry_date",
+                    "type": "DATE"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "country",
+                    "type": "VARCHAR(100)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "guide_id",
+                    "type": "BIGINT",
+                    "constraints": {
+                      "nullable": "false",
+                      "unique": "true"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "baseTableName": "passport",
+              "baseColumnNames": "guide_id",
+              "constraintName": "fk_passport_guide",
+              "referencedTableName": "guide",
+              "referencedColumnNames": "id"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "5",
+        "author": "Xayyam Garazada",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "traveler",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "BIGINT",
+                    "autoIncrement": "true",
+                    "constraints": {
+                      "primaryKey": "true",
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "first_name",
+                    "type": "VARCHAR(255)",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "last_name",
+                    "type": "VARCHAR(255)",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "email",
+                    "type": "VARCHAR(255)",
+                    "constraints": {
+                      "nullable": "false",
+                      "unique": "true"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "6",
+        "author": "Xayyam Garazada",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "tour_traveler",
+              "columns": [
+                {
+                  "column": {
+                    "name": "tour_id",
+                    "type": "BIGINT",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "traveler_id",
+                    "type": "BIGINT",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "baseTableName": "tour_traveler",
+              "baseColumnNames": "tour_id",
+              "constraintName": "fk_tour_traveler_tour",
+              "referencedTableName": "tour",
+              "referencedColumnNames": "id"
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "baseTableName": "tour_traveler",
+              "baseColumnNames": "traveler_id",
+              "constraintName": "fk_tour_traveler_traveler",
+              "referencedTableName": "traveler",
+              "referencedColumnNames": "id"
+            }
+          },
+          {
+            "addUniqueConstraint": {
+              "tableName": "tour_traveler",
+              "columnNames": "tour_id, traveler_id",
+              "constraintName": "uk_tour_traveler"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "id": "7",
+        "author": "Xayyam Garazada",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "guide_tour",
+              "columns": [
+                {
+                  "column": {
+                    "name": "guide_id",
+                    "type": "BIGINT",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "tour_id",
+                    "type": "BIGINT",
+                    "constraints": {
+                      "nullable": "false"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "baseTableName": "guide_tour",
+              "baseColumnNames": "guide_id",
+              "constraintName": "fk_guide_tour_guide",
+              "referencedTableName": "guide",
+              "referencedColumnNames": "id"
+            }
+          },
+          {
+            "addForeignKeyConstraint": {
+              "baseTableName": "guide_tour",
+              "baseColumnNames": "tour_id",
+              "constraintName": "fk_guide_tour_tour",
+              "referencedTableName": "tour",
+              "referencedColumnNames": "id"
+            }
+          },
+          {
+            "addUniqueConstraint": {
+              "tableName": "guide_tour",
+              "columnNames": "guide_id, tour_id",
+              "constraintName": "uk_guide_tour"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
